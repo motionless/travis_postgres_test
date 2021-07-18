@@ -18,6 +18,14 @@ addons:
 jobs:
   include:
     - name: Test
+      addons:
+        postgresql: "12"
+        apt:
+          packages:
+            - postgresql-12
+            - postgresql-client-12
+      before_script:
+        - pg_config --version
       before_install:
         - gem install bundler
       env:
@@ -28,6 +36,3 @@ jobs:
     - name: Rubocop
       script: bundle exec rubocop -D -c .rubocop.yml
 
-notifications:
-  email:
-    - yauheni@extern.freeletics.com
