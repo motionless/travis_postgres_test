@@ -26,6 +26,7 @@ jobs:
             - postgresql-client-12
       before_script:
         - pg_config --version
+        - psql -c 'create database "test-database";'
       before_install:
         - gem install bundler
       env:
