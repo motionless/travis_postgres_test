@@ -1,0 +1,32 @@
+language: ruby
+dist: focal
+cache: bundler
+rvm:
+  - 2.7.1
+
+services:
+  - postgresql
+
+addons:
+  postgresql: "12"
+  apt:
+    packages:
+      - postgresql-12
+      - postgresql-client-12
+
+jobs:
+  include:
+    - name: Test
+      before_install:
+        - gem install bundler
+      env:
+        - SNS_RETRIES=0
+        - SNS_TIMEOUT=1
+      script: bundle exec rspec
+
+    - name: Rubocop
+      script: bundle exec rubocop -D -c .rubocop.yml
+
+notifications:
+  email:
+    - yauheni@extern.freeletics.com
