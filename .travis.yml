@@ -22,8 +22,8 @@ jobs:
       before_install:
         - gem install bundler
       env:
-        - SNS_RETRIES=0
-        - SNS_TIMEOUT=1
+        - PGPORT=5433
+        - PGUSER=travis
       script: bundle exec rspec
 
     - name: Rubocop
